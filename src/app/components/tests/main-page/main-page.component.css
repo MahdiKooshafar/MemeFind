@@ -1,0 +1,23 @@
+.containerMain{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    min-height: 100svh;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.clientTab , .earnTab{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+.clientTab{
+    min-height: 15svh ;
+    background-color: rgba(28, 87, 105, 0.459);
+}
+.earnTab{
+    flex:1;
+    background-color: rgba(28, 87, 105, 0.459);
+}
