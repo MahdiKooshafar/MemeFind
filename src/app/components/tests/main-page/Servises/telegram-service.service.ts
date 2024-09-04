@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +11,31 @@ export class TelegramServiceService {
 
   constructor(private http: HttpClient) { }
 
-  setGameScore(userId: number, score: number, messageId: number): Observable<any> {
+  setGameScore(userId: number, score: number): Observable<any> {
     const url = `${this.apiUrl}/setGameScore`;
     const params = {
       user_id: userId,
       score: score,
-      message_id: messageId
     };
     return this.http.post(url, params);
   }
 
-  getGameHighScores(userId: number, messageId: number): Observable<any> {
+  getGameHighScores(userId: number, score: number): Observable<any> {
     const url = `${this.apiUrl}/getGameHighScores`;
     const params = {
       user_id: userId,
-      message_id: messageId
+      lscore: score
     };
     return this.http.get(url, { params });
+  }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    if (error.status === 0) {
+      console.error('A client-side or network error occurred:', error.error);
+    } else {
+      console.error(`Backend returned code ${error.status}, body was:`, error.error);
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
 

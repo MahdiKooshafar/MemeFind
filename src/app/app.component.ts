@@ -23,6 +23,7 @@ export class AppComponent {
     setTimeout(() => {
       this.loading = false;
       this.mainapp = true ;
+      this.telServise.ready()
       this.telServise.expand();
     }, 2000);
   }
