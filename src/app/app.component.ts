@@ -19,6 +19,7 @@ export class AppComponent {
   title = 'Memefind';
   loading : boolean = true;
   mainapp : boolean = false; 
+  refferer : string = "";
   ngOnInit(){
     setTimeout(() => {
       this.loading = false;
@@ -26,5 +27,12 @@ export class AppComponent {
       this.telServise.ready()
       this.telServise.expand();
     }, 2000);
+    // const referrerIndex = window.location.href;
+    // const params = new URLSearchParams(new URL(referrerIndex).search);
+    // const referrerValue = params.get('startapp');
+    // const referrerId = referrerValue?.slice(11)
+    // console.log('referrer ID:', referrerId);
+
+    // window.location.href.slice(referrerIndex + 8 ,  )
   }
 }

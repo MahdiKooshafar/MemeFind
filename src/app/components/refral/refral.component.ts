@@ -14,55 +14,63 @@ import { ReferalService } from '../../Services/TelReferal/referal.service';
   styleUrl: './refral.component.css'
 })
 export class RefralComponent {
-
+  
   referralCode: string = "";
+  refralName : string = "refralCode";
   
   constructor(private referalService: ReferalService, private telService: TelegramWebappService) { }
-
-
+  
+  
+  generateReferralLinkString() {
+    this.referralCode = this.referalService.generateReferralCode();
+     
+  }
   ngOnInit() {
-
-    const initData = this.referalService.getInitData();
-
-    this.telService.webApp.CloudStorage.getItem(this.referralCode, (e, value) => {
-
+    // const initData = this.referalService.getInitData();
+    
+    this.telService.webApp.CloudStorage.getItem(this.refralName, (e, value) => {
+      
       if (e != null) {
-
-        this.telService.webApp.CloudStorage.setItem(this.referralCode, this.referralCode, (e: string | null, bool: boolean) => {
-
-          if (e != null) {
-
-            console.log(e)
-
-          } 
-
-          else {
-
-            console.log("okeye")
-
-          }
-
-        })
-      } 
-
+        console.log(e)
+      }
+      
       else {
-
+        if(value != ""){
+          this.referralCode = value;
+        }else{
+          this.generateReferralLinkString();
+          this.telService.webApp.CloudStorage.setItem(this.refralName, this.referralCode, (e: string | null, bool: boolean) => {
+          
+          if (e != null) {
+            
+            console.log(e)
+            
+          } 
+          
+          else {
+            
+            console.log("okeye")
+            
+          }
+          
+        })
+        }
         console.log("its call back log", value);
         
       }
     })
 
-    console.log(initData);
+    // console.log(initData);
 
   }
 
   generateReferralLink() {
-    this.referalService.sendReferralLink(this.referralCode);
+    if(this.referralCode != ""){
+      this.referalService.sendReferralLink(this.referralCode);
+    }else{
+      alert("kir shodi")
+    }
   }
-  // generateReferralLink() {
-  //   const referralCode = this.telegramService.generateReferralCode();
-  //   this.telegramService.sendReferralLink(referralCode);
-  // }
 
 }
 

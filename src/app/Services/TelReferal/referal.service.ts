@@ -8,7 +8,7 @@ export class ReferalService {
 
   constructor(private telService: TelegramWebappService) { }
 
-  getInitData(){
+  getInitData() {
     return this.telService.initData;
   }
 
@@ -17,7 +17,13 @@ export class ReferalService {
   }
 
   sendReferralLink(referralCode: string) {
-    const link = `https://t.me/meemefindbot?start=${referralCode}`;
-    this.telService.sendData(link);
+    // const referr = this.telService.initDataUnsafe.user?.id;
+    const link = `https://t.me/meemefindbot/start?startapp=${referralCode}`;
+    navigator.clipboard.writeText(link).then(function () {
+      console.log('Async: Copying to clipboard was successful!');
+    }, function (err) {
+      console.error('Async: Could not copy text: ', err);
+    });
+    
   }
 }

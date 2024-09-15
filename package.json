@@ -19,8 +19,10 @@
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@zakarliuka/ng-telegram-webapp": "^1.0.6",
+    "gsap": "^3.12.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.7.0",
+    "winwheel": "^1.0.1",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {
